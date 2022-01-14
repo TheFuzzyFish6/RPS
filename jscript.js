@@ -1,10 +1,19 @@
 function computerPlay() {
     let arr = ['Rock', 'Paper', 'Scissors'];
     let result = arr[Math.floor(Math.random() * arr.length)];
-    return result;
+    switch (result) {
+        case "Rock":
+            b = -1;
+           break;
+       case "Paper":
+            b = 0;
+           break;
+       case "Scissors":
+            b = 1;
+           break;
+    }
+    return b;
 }
-
-console.log(computerPlay());
 
 function playerPlay() {
     let a;
@@ -34,12 +43,42 @@ function playerPlay() {
     return a;
 }
 
-const computerChoice = computerPlay()
-const playerChoice = playerPlay()
-
-console.log(computerChoice + " " + playerChoice)
-
+const computerChoice = computerPlay();
+const playerChoice = playerPlay();
+console.log ( computerChoice + " " + playerChoice)
 
 function playRound(playerChoice, computerChoice) {
+    let numericalResult = playerChoice + computerChoice;
+    let computerScore = 0;
+    let playerScore = 0;
+    if (numericalResult === 0) {
+         computerScore = computerScore + 0;
+         playerScore = playerScore + 0;
+    } else if (numericalResult === 1 || numericalResult === -2) {
+         computerScore = computerScore + 1;
+         playerScore = playerScore + 0;
+    } else if (numericalResult === -1 || numericalResult === 2) {
+         computerScore = computerScore + 0;
+         playerScore = playerScore + 1;        
+    }
 
+    return {playerScore, computerScore};
 }
+
+console.log(playRound(playerChoice, computerChoice));
+
+let { playerScore, computerScore } = playRound(playerChoice, computerChoice);
+
+console.log(playerScore);
+console.log(computerScore);
+
+function gameResult(playerScore, computerScore) {
+    if (computerScore>playerScore) {
+        return "YOU SUCK AND LOSE! The Current Score is Computer: " + computerScore + " Player: " + playerScore;
+    } else if (computerScore<playerScore) {
+        return "Congrats... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
+    } else if (computerScore==playerScore) {
+        return "Tied... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
+}}
+
+console.log(gameResult(playerScore, computerScore));
