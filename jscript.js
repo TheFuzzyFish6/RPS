@@ -1,56 +1,37 @@
+let buttons = document.querySelectorAll('.button');
+let computerScore = 0;
+let playerScore = 0;
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerChoice = Number(button.id);
+        console.log(playerChoice);
+        playRound(playerChoice, computerPlay());        
+    });    
+});
+
+console.log(gameResult(playerScore, computerScore));
+
 function computerPlay() {
     let arr = ['Rock', 'Paper', 'Scissors'];
     let result = arr[Math.floor(Math.random() * arr.length)];
     switch (result) {
         case "Rock":
-            b = -1;
+            a = -1;
            break;
        case "Paper":
-            b = 0;
+            a = 0;
            break;
        case "Scissors":
-            b = 1;
+            a = 1;
            break;
     }
-    return b;
-}
-
-function playerPlay() {
-    let a;
-    let playerPrompt = prompt("Rock, Paper, or Scissors?").toLowerCase().split(' ');       
-    
-    for (let i = 0; i < playerPrompt.length; i++) {
-
-      if(playerPrompt){
-        playerPrompt[i] = playerPrompt[i].charAt(0).toUpperCase() + playerPrompt[i].substring(1);
-    
-    }
-}
-
-    switch (playerPrompt.join(' ')) {
-        case "Rock":
-             a = 1;
-            break;
-        case "Paper":
-             a = 0;
-            break;
-        case "Scissors":
-             a = -1;
-            break;
-        default:
-             a = "Hey Dumbass, I said Rock, Paper, Scissors? Can you Read? I don't think you are smart enough for this children's game...";    
-    }
     return a;
-}
-
-const computerChoice = computerPlay();
-const playerChoice = playerPlay();
-console.log ( computerChoice + " " + playerChoice)
+};
 
 function playRound(playerChoice, computerChoice) {
     let numericalResult = playerChoice + computerChoice;
-    let computerScore = 0;
-    let playerScore = 0;
+    console.log(computerChoice)
     if (numericalResult === 0) {
          computerScore = computerScore + 0;
          playerScore = playerScore + 0;
@@ -61,16 +42,9 @@ function playRound(playerChoice, computerChoice) {
          computerScore = computerScore + 0;
          playerScore = playerScore + 1;        
     }
-
+    console.log(playerScore, computerScore, gameResult(playerScore, computerScore))
     return {playerScore, computerScore};
-}
-
-console.log(playRound(playerChoice, computerChoice));
-
-let { playerScore, computerScore } = playRound(playerChoice, computerChoice);
-
-console.log(playerScore);
-console.log(computerScore);
+};
 
 function gameResult(playerScore, computerScore) {
     if (computerScore>playerScore) {
@@ -80,5 +54,3 @@ function gameResult(playerScore, computerScore) {
     } else if (computerScore==playerScore) {
         return "Tied... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
 }}
-
-console.log(gameResult(playerScore, computerScore));
