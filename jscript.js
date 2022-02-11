@@ -2,19 +2,42 @@ let buttons = document.querySelectorAll('.button');
 let computerScore = 0;
 let playerScore = 0;
 
+const displaypScore = document.createElement('div');
+const displaycScore = document.createElement('div');    
+const playerChoiceDisplay = document.createElement('div');
+const computerChoiceDisplay = document.createElement('div');
+const gameGrid = document.getElementById('gameResults');
+gameGrid.append(playerChoiceDisplay, computerChoiceDisplay, displaypScore, displaycScore);
+
+
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         let playerChoice = Number(button.id);
-        console.log(playerChoice);
-        playRound(playerChoice, computerPlay());        
+        playerChoiceDisplay.innerHTML = "The Moron (that's you) Chose: " + convertPlayerChoice(playerChoice);
+        playRound(playerChoice, computerPlay());
+        displaypScore.innerHTML = "Newb's Score: " + playerScore;
+        displaycScore.innerHTML = "Genius's Score: " + computerScore; 
+        
+        if (playerScore > 3) {
+            playRound(playerChoice, activateCheatProtical())
+        }
     });    
 });
 
-console.log(gameResult(playerScore, computerScore));
+function convertPlayerChoice(playerChoice) {
+    if (playerChoice === 1) {
+        return "Rock";
+    } else if (playerChoice === 0) {
+        return "Papper";
+    } else if (playerChoice === -1) {
+        return "Scissors"
+    }
+};
 
 function computerPlay() {
     let arr = ['Rock', 'Paper', 'Scissors'];
     let result = arr[Math.floor(Math.random() * arr.length)];
+    computerChoiceDisplay.innerHTML ="The Genius Chose: " + result;
     switch (result) {
         case "Rock":
             a = -1;
@@ -42,7 +65,7 @@ function playRound(playerChoice, computerChoice) {
          computerScore = computerScore + 0;
          playerScore = playerScore + 1;        
     }
-    console.log(playerScore, computerScore, gameResult(playerScore, computerScore))
+    
     return {playerScore, computerScore};
 };
 
@@ -53,4 +76,5 @@ function gameResult(playerScore, computerScore) {
         return "Congrats... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
     } else if (computerScore==playerScore) {
         return "Tied... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
-}}
+}};
+
