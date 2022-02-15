@@ -9,18 +9,27 @@ const computerChoiceDisplay = document.createElement('div');
 const gameGrid = document.getElementById('gameResults');
 gameGrid.append(playerChoiceDisplay, computerChoiceDisplay, displaypScore, displaycScore);
 
+const source = document.createElement('source');
+    source.setAttribute('src', './animationsRPS/leanLeft.mp4');
+    source.setAttribute('type', 'video/mp4');
+const video = document.getElementById('backgroundVideo');
+    video.append(source)
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         let playerChoice = Number(button.id);
+        console.log(playerChoice);
         playerChoiceDisplay.innerHTML = "The Moron (that's you) Chose: " + convertPlayerChoice(playerChoice);
+        if (playerScore < 4) {
         playRound(playerChoice, computerPlay());
-        displaypScore.innerHTML = "Newb's Score: " + playerScore;
-        displaycScore.innerHTML = "Genius's Score: " + computerScore; 
-        
-        if (playerScore > 3) {
-            playRound(playerChoice, activateCheatProtical())
+        } else if (playerScore > 3) {
+        playRound(playerChoice, activateCheatProtical(playerChoice))
+        } else if (computerScore === 5) {
+            
         }
+        displaypScore.innerHTML = "Newb's Score: " + playerScore;
+        displaycScore.innerHTML = "Genius's Score: " + computerScore;
+        changeBackgroundVideo();
     });    
 });
 
@@ -54,10 +63,9 @@ function computerPlay() {
 
 function playRound(playerChoice, computerChoice) {
     let numericalResult = playerChoice + computerChoice;
-    console.log(computerChoice)
     if (numericalResult === 0) {
-         computerScore = computerScore + 0;
-         playerScore = playerScore + 0;
+        computerScore = computerScore + 0;
+        playerScore = playerScore + 0;
     } else if (numericalResult === 1 || numericalResult === -2) {
          computerScore = computerScore + 1;
          playerScore = playerScore + 0;
@@ -78,3 +86,37 @@ function gameResult(playerScore, computerScore) {
         return "Tied... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
 }};
 
+function activateCheatProtical (playerChoice) {
+    if (playerChoice === 1) {
+        computerChoiceDisplay.innerHTML ="The Genius Chose: Paper"
+        let a = 0
+        return a;
+    } else if (playerChoice === 0) {
+        computerChoiceDisplay.innerHTML ="The Genius Chose: Scissors"
+        let a = 1
+        return a;
+    } else if (playerChoice === -1) {
+        computerChoiceDisplay.innerHTML ="The Genius Chose: Rock"
+        let a = -1
+        return a;
+    }
+};
+
+function changeBackgroundVideo () {
+    if (computerScore === 5) {
+        source.setAttribute('src', './animationsRPS/Cookie.mp4');
+        video.load().play();
+    } else if (playerScore > 3) {
+        source.setAttribute('src', './animationsRPS/Focus.mp4');
+        video.load().play();
+    } else if (computerScore < playerScore) {
+        source.setAttribute('src', './animationsRPS/Losing.mp4');
+        video.load().play();
+    } else if (computerScore > playerScore) {
+        source.setAttribute('src', './animationsRPS/leanRight.mp4');
+        video.load().play();
+    } else if (computerScore = playerScore) {
+        source.setAttribute('src', './animationsRPS/leanLeft.mp4');
+        video.load().play();
+    }
+};
