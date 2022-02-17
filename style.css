@@ -1,13 +1,17 @@
+
 video {
     position: relative;
     width: 100%;
     top: 0;
     height: auto;
+    opacity: 0.8;
 }
 
 .videoContainer {
-    border: 100px solid gray;
+    display: flex;
+    border: 100px solid rgb(222, 218, 191);
     border-radius: 10px;
+    right: 0;
     position: absolute;
     top: 0;
     overflow: hidden;
