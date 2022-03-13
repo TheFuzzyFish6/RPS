@@ -9,6 +9,12 @@
     object-fit: cover;  
 }
 
+#textBox {
+    display: flex;
+    color: rgb(27, 254, 17);  
+    justify-content: center;  
+}
+
 .videoContainer {
     display: flex;
     width: 100%;
@@ -25,6 +31,11 @@
 button {
     display: flex;
     z-index: 1000;
+    margin: 10px;
+    padding: 15px;
+    background: black;
+    color: rgb(27, 254, 17);
+    border: 2px solid rgb(27, 254, 17);
 }
 
 .playerChoices {
@@ -46,8 +57,25 @@ button {
 
 .contentContainer {
     display:flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 75px solid rgb(222, 218, 191);
-    border-radius: 10px;
     z-index: 4;
     width: 100%;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    margin: 10px;
+}
+
+#gameResults {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    color: rgb(27, 254, 17);
+    z-index: 1000;
 }

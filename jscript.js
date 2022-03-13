@@ -9,6 +9,9 @@ const computerChoiceDisplay = document.createElement('div');
 const gameGrid = document.getElementById('gameResults');
 gameGrid.append(playerChoiceDisplay, computerChoiceDisplay, displaypScore, displaycScore);
 
+const textBox = document.querySelector('#textBox');
+    textBox.innerHTML = '<span>Heh, you think you can beat me?.... in a best of 5?... You have made a foolish mistake.... Allow me to show you the errors of your ways you fucking newb.</span>';
+
 const source = document.createElement('source');
     source.setAttribute('src', './animationsRPS/leanLeft.mp4');
     source.setAttribute('type', 'video/mp4');
@@ -29,7 +32,8 @@ buttons.forEach((button) => {
         }
         displaypScore.innerHTML = "Newb's Score: " + playerScore;
         displaycScore.innerHTML = "Genius's Score: " + computerScore;
-        changeBackgroundVideo();
+        updateTextBox();
+        changeBackgroundVideo();        
     });    
 });
 
@@ -77,15 +81,6 @@ function playRound(playerChoice, computerChoice) {
     return {playerScore, computerScore};
 };
 
-function gameResult(playerScore, computerScore) {
-    if (computerScore>playerScore) {
-        return "YOU SUCK AND LOSE! The Current Score is Computer: " + computerScore + " Player: " + playerScore;
-    } else if (computerScore<playerScore) {
-        return "Congrats... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
-    } else if (computerScore==playerScore) {
-        return "Tied... NO ONE CARES. The Current Score is Computer: " + computerScore + " Player: " + playerScore;
-}};
-
 function activateCheatProtical (playerChoice) {
     if (playerChoice === 1) {
         computerChoiceDisplay.innerHTML ="The Genius Chose: Paper"
@@ -120,3 +115,21 @@ function changeBackgroundVideo () {
         video.load().play();
     }
 };
+
+function updateTextBox () {
+    if (computerScore === 5) {
+        textBox.innerHTML = '<span>GG EZ FKN NEWB... GET GUD LUL...</span>';
+    } else if (playerScore > 3) {
+        textBox.innerHTML = '<span>THERE IS NO WAY YOU WILL EVER BEAT ME...GOD GAMER KATANA MODE ACTIVATED...</span>';
+    } else if (computerScore < playerScore) {
+        textBox.innerHTML = '<span>Enjoy your luck while it lasts... Your Defeat by my hands is still assured...</span>';
+    } else if (computerScore > playerScore) {
+        textBox.innerHTML = '<span>Why dont you practice some more and come back later you filthy NEWB...</span>';
+    } else if (computerScore = playerScore) {    
+        textBox.innerHTML = '<span>Tied... HEH... not for long...</span>';
+    }
+};
+
+function endGameProtocol () {
+    
+}
